@@ -30,6 +30,8 @@ spec:
       labels: 
         app: drupal
     spec: 
+      imagePullSecrets:
+        - name: dockerhub-secret
       initContainers:
         -
           name: init-sites-volume
@@ -42,7 +44,6 @@ spec:
             name: vol-drupal
           - mountPath: /config
             name: config-volume
-
       containers: 
         - 
           image: pincholinco/drupal:my_drupal
@@ -98,7 +99,3 @@ spec:
           name: config-volume
           configMap:
             name: drupal-config
-        -
-          name: docker-config-volume
-          secret:
-            secretName: dockerhub-secret
