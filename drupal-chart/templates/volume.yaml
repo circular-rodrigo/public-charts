@@ -37,6 +37,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata: 
   name: drupal-pvc-mysql
+  annotations: 
+      storageClassName: "standard"
 spec: 
   accessModes: 
     - ReadWriteOnce
