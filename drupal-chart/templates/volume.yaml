@@ -37,11 +37,30 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata: 
   name: drupal-pvc-mysql
-  annotations: 
-      storageClassName: "standard"
 spec: 
   accessModes: 
     - ReadWriteOnce
+  storageClassName: none
   resources: 
     requests: 
       storage: 5Gi
+  volumeName: mysql-pv
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce  # This means the volume can be mounted as read-write by a single node
+  persistentVolumeReclaimPolicy: Delete  # Retains the data even after the PVC is deleted
+  storageClassName: none
+  hostPath:
+    path: /mnt/mysql-data  # Update this with the path on the host machine where data will be stored
+    type: DirectoryOrCreate
+
+
+
