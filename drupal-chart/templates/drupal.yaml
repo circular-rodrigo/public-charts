@@ -1,0 +1,100 @@
+#---
+#apiVersion: v1
+#kind: Service
+#metadata: 
+#  name: drupal-service
+#spec: 
+#  ports: 
+#    - 
+#      name: http
+#      port: 8080
+#      protocol: TCP
+#      nodePort: 30080
+#  selector: 
+    #    app: drupal
+      #  type: LoadBalancer
+      #--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  labels: 
+    app: drupal
+  name: drupal
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      app: drupal
+  template: 
+    metadata: 
+      labels: 
+        app: drupal
+    spec: 
+      initContainers:
+        -
+          name: init-sites-volume
+          image: my_drupal:latest
+          imagePullPolicy: IfNotPresent
+          command: ['/bin/bash', '-c']
+          args: ['cp -r /var/www/html/sites/ /data/; chown www-data:www-data /data/ -R']
+          volumeMounts:
+          - mountPath: /data
+            name: vol-drupal
+          - mountPath: /config
+            name: config-volume
+
+      containers: 
+        - 
+          image: my_drupal:latest
+          name: drupal
+          imagePullPolicy: IfNotPresent
+          lifecycle:          
+            postStart:
+              exec:
+                command: 
+                  - '/bin/bash'
+                  - '-c'
+                  - |
+                    su
+                    cp /config/dsettings.sh ./dsettings.sh
+                    chmod +x ./dsettings.sh
+                    mv ./dsettings.sh /usr/local/bin/dsettings
+                    xargs -a /config/install_params.yaml drush site-install standard
+                    composer require drupal/better_exposed_filters drupal/token drupal/admin_toolbar drupal/login_emailusername
+                    drush en -y views better_exposed_filters admin_toolbar token login_emailusername
+                    #usermod -aG  www-data root
+                    #chown root:www-data web/sites/default/settings.php
+                    #chmod 777 web/sites/default/settings.php
+                    #ls -l web/sites/default/settings.php > logs.txt
+                    #drush --verbose site-install standard --config=/config/install_params.yaml --yes
+                    # chown www-data:www-data web/sites/default/settings.php
+                   
+          ports:
+            -
+              containerPort: 8080
+
+          volumeMounts:
+          - mountPath: /var/www/html/modules
+            name: vol-drupal
+            subPath: modules
+          - mountPath: /var/www/html/profiles
+            name: vol-drupal
+            subPath: profiles
+          - mountPath: /var/www/html/sites
+            name: vol-drupal
+            subPath: sites
+          - mountPath: /var/www/html/themes
+            name: vol-drupal
+            subPath: themes
+          - mountPath: /config
+            name: config-volume
+       
+      volumes:
+        - 
+          name: vol-drupal
+          persistentVolumeClaim: 
+            claimName: test-pvc-host 
+        - 
+          name: config-volume
+          configMap:
+            name: drupal-config

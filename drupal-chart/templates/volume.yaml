@@ -1,0 +1,45 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: test-pvc-host
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  volumeName: test-pv-host
+  storageClassName: none
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: test-pv-host
+  labels:
+    app.kubernetes.io/managed-by: "Helm"
+  annotations:
+    meta.helm.sh/release-name: "drupal-chart"
+    meta.helm.sh/release-namespace: "default"
+spec:
+  storageClassName: none
+  capacity:
+    storage: 10Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  hostPath:
+    path: /mnt/k8sdata
+    type: DirectoryOrCreate
+--- 
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: 
+  name: drupal-pvc-mysql
+spec: 
+  accessModes: 
+    - ReadWriteOnce
+  resources: 
+    requests: 
+      storage: 5Gi
