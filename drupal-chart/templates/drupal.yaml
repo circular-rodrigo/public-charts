@@ -33,7 +33,7 @@ spec:
       initContainers:
         -
           name: init-sites-volume
-          image: my_drupal:latest
+          image: pincholinco/drupal:my_drupal
           imagePullPolicy: IfNotPresent
           command: ['/bin/bash', '-c']
           args: ['cp -r /var/www/html/sites/ /data/; chown www-data:www-data /data/ -R']
@@ -45,7 +45,7 @@ spec:
 
       containers: 
         - 
-          image: my_drupal:latest
+          image: pincholinco/drupal:my_drupal
           name: drupal
           imagePullPolicy: IfNotPresent
           lifecycle:          
