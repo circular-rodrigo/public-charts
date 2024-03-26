@@ -98,3 +98,7 @@ spec:
           name: config-volume
           configMap:
             name: drupal-config
+        -
+          name: docker-config-volume
+          secret:
+            secretName: dockerhub-secret
