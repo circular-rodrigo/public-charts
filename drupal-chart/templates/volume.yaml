@@ -3,6 +3,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: test-pvc-host
+  namespace: {{.Release.Namespace}}
 spec:
   accessModes:
     - ReadWriteOnce
@@ -16,6 +17,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: test-pv-host
+  namespace: {{.Release.Namespace}}
   labels:
     app.kubernetes.io/managed-by: "Helm"
   annotations:
@@ -37,6 +39,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata: 
   name: drupal-pvc-mysql
+  namespace: {{.Release.Namespace}}
 spec: 
   accessModes: 
     - ReadWriteOnce
@@ -50,6 +53,7 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: mysql-pv
+  namespace: {{.Release.Namespace}}
 spec:
   capacity:
     storage: 5Gi
