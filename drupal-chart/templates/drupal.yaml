@@ -19,7 +19,7 @@ kind: Deployment
 metadata: 
   labels: 
     app: drupal
-  name: drupal
+  name: {{.Release.Name}}-drupal
   namespace: {{.Release.Namespace}}
 spec: 
   replicas: 1

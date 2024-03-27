@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     app: drupal
-  name: drupal-node-service
+  name: {{.Release.Name}}-drupal-node-service
   namespace: {{.Release.Namespace}}
 spec:
   # clusterIP: 10.102.188.158

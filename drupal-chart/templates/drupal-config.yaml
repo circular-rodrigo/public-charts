@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: drupal-config
+  name: {{.Release.Name}}-drupal-config
   namespace: {{.Release.Namespace}}
 data:
   install_website.sh: |

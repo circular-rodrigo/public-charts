@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: test-pvc-host
+  name: {{.Release.Name}}-test-pvc-host
   namespace: {{.Release.Namespace}}
 spec:
   accessModes:
@@ -16,7 +16,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: test-pv-host
+  name: {{.Release.Name}}-test-pv-host
   namespace: {{.Release.Namespace}}
   labels:
     app.kubernetes.io/managed-by: "Helm"
@@ -38,7 +38,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata: 
-  name: drupal-pvc-mysql
+  name: {{.Release.Name}}-drupal-pvc-mysql
   namespace: {{.Release.Namespace}}
 spec: 
   accessModes: 
@@ -52,7 +52,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: mysql-pv
+  name: {{.Release.Name}}-mysql-pv
   namespace: {{.Release.Namespace}}
 spec:
   capacity:
