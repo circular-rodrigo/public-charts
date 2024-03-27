@@ -20,7 +20,7 @@ metadata:
     app.kubernetes.io/managed-by: "Helm"
   annotations:
     meta.helm.sh/release-name: "drupal-chart"
-    meta.helm.sh/release-namespace: {{.Values.namespace}}
+    meta.helm.sh/release-namespace: {{.Release.Namespace}}
 spec:
   storageClassName: none
   capacity:
