@@ -62,7 +62,7 @@ spec:
                     mv ./dsettings.sh /usr/local/bin/dsettings
                     composer require drush/drush
                     xargs -a /config/install_params.yaml drush site-install standard
-                    composer require drupal/better_exposed_filters drupal/token drupal/admin_toolbar drupal/login_emailusername
+                    composer require {{ .Values.modules }}
                     drush en -y views better_exposed_filters admin_toolbar token login_emailusername
                     #usermod -aG  www-data root
                     #chown root:www-data web/sites/default/settings.php

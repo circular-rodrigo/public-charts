@@ -9,6 +9,7 @@ namespace: default
 siteName: "test site"
 accountPass: "123"
 
+modules: "drupal/better_exposed_filters drupal/token drupal/admin_toolbar drupal/login_emailusername"
 
 replicaCount: 1
 

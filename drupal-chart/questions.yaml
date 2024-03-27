@@ -5,3 +5,10 @@ questions:
   description:  the name of your website
   type: string
   label: Example Boolean - Enable Docker Runtime
+
+# Questions for tab named "Some Example ConfigMap Values"
+- variable: modules
+  default: test site
+  description:  the name of your website
+  type: string
+  label: Example Boolean - Enable Docker Runtime
