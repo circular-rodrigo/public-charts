@@ -9,8 +9,8 @@ namespace: default
 siteName: "test site"
 accountPass: "123"
 
-modules: "drupal/better_exposed_filters drupal/token drupal/admin_toolbar drupal/login_emailusername drupal/bootstrap"
-theme:  "drupal/bootstrap"
+modules: "better_exposed_filters token admin_toolbar login_emailusername bootstrap"
+theme:  "bootstrap"
 
 replicaCount: 1
 
