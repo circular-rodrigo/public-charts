@@ -12,7 +12,7 @@ spec:
       protocol: TCP
       targetPort: 3306
   selector: 
-    app: {{.Release.Name}}-drupal-mysql
+    app: drupal-mysql
 --- 
 apiVersion: apps/v1
 kind: Deployment
@@ -22,11 +22,11 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: {{.Release.Name}}-drupal-mysql
+      app: drupal-mysql
   template: 
     metadata: 
       labels: 
-        app: {{.Release.Name}}-drupal-mysql
+        app: drupal-mysql
     spec: 
       containers: 
         - 

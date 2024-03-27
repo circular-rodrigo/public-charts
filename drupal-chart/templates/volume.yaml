@@ -65,6 +65,7 @@ spec:
   hostPath:
     path: /mnt/mysql-data  # Update this with the path on the host machine where data will be stored
     type: DirectoryOrCreate
+---
 
 
 
