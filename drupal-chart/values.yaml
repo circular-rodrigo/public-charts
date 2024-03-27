@@ -5,7 +5,7 @@
 namespace: default
 
 #drupalConfig 
-
+nodePort: 32080
 siteName: "test site"
 accountPass: "123"
 

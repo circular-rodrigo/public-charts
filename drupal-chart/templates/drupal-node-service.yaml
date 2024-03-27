@@ -15,7 +15,7 @@ spec:
   - IPv4
   ipFamilyPolicy: SingleStack
   ports:
-  - nodePort: 32080
+  - nodePort: {{.Values.nodePort}}
     port: 8080
     protocol: TCP
     targetPort: 8080

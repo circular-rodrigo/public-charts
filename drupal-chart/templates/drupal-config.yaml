@@ -7,7 +7,7 @@ data:
   install_website.sh: |
     #!/bin/bash
     drush site-install standard \
-    --db-url="mysql://rod:rod@drupal-mysql-service:3306/drupal-database" \
+    --db-url="mysql://rod:rod@{{.Release.Name}}-drupal-mysql-service:3306/drupal-database" \
     --account-name=admin \
     --account-pass=abc \
     --site-name="Your Site Name" \
@@ -16,7 +16,7 @@ data:
     --yes
  
   install_params.yaml: |
-    --db-url="mysql://rod:rod@drupal-mysql-service:3306/drupal-database"
+    --db-url="mysql://rod:rod@{{.Release.Name}}-drupal-mysql-service:3306/drupal-database"
     --site-name="{{ .Values.siteName }}"
           # mail: 'admin@example.com'
           # default-langcode: 'en'
