@@ -61,8 +61,8 @@ spec:
                     chmod +x ./dsettings.sh
                     mv ./dsettings.sh /usr/local/bin/dsettings
                     composer require drush/drush
-                    xargs -a /config/install_params.yaml drush site-install standard
                     composer require {{ .Values.modules }}
+                    xargs -a /config/install_params.yaml drush site-install standard
                     drush en -y views better_exposed_filters admin_toolbar token login_emailusername
                     #usermod -aG  www-data root
                     #chown root:www-data web/sites/default/settings.php
