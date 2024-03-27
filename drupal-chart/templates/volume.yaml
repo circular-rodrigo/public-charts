@@ -10,7 +10,7 @@ spec:
   resources:
     requests:
       storage: 10Gi
-  volumeName:{{.Release.Name}}-test-pv-host
+  volumeName: {{.Release.Name}}-test-pv-host
   storageClassName: none
 ---
 apiVersion: v1
@@ -47,7 +47,7 @@ spec:
   resources: 
     requests: 
       storage: 5Gi
-  volumeName:{{.Release.Name}}-mysql-pv
+  volumeName: {{.Release.Name}}-mysql-pv
 ---
 apiVersion: v1
 kind: PersistentVolume

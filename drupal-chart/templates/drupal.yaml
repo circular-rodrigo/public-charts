@@ -32,7 +32,7 @@ spec:
         app: drupal
     spec: 
       imagePullSecrets:
-        - name:{{.Release.Name}}-dockerhub-secret
+        - name: {{.Release.Name}}-dockerhub-secret
       initContainers:
         -
           name: init-sites-volume
@@ -99,8 +99,8 @@ spec:
         - 
           name: vol-drupal
           persistentVolumeClaim: 
-            claimName:{{.Release.Name}}-test-pvc-host 
+            claimName: {{.Release.Name}}-test-pvc-host 
         - 
           name: config-volume
           configMap:
-            name:{{.Release.Name}}-drupal-config
+            name: {{.Release.Name}}-drupal-config
