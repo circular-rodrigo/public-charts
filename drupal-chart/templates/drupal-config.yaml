@@ -31,7 +31,6 @@ data:
         #site_name: "test-site"
         #mail: 'admin@example.com'
         #langcode: 'en'
-    #--site-theme="{{ .Values.theme | quote }}"
   dsettings.sh: | 
     #!/bin/bash
     #

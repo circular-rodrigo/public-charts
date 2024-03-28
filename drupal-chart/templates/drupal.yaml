@@ -61,13 +61,14 @@ spec:
                     cp /config/dsettings.sh ./dsettings.sh
                     chmod +x ./dsettings.sh
                     mv ./dsettings.sh /usr/local/bin/dsettings
+                    rm web/sites/default/settings.php
                     composer require drush/drush
                     composer require drupal/{{ .Values.theme }} 
-                    # xargs -a /config/install_params.yaml drush site-install standard
-                    # drush theme:install {{ .Values.theme }} -y
-                    # drush config-set system.theme default {{ .Values.theme }} -y
-                    # composer require sed 's/[^ ]* */ drupal\\&/g' <<< {{ .Values.modules }}
-                    # drush en -y {{ .Values.modules }}
+                    xargs -a /config/install_params.yaml drush site-install standard
+                    drush theme:install {{ .Values.theme }} -y
+                    drush config-set system.theme default {{ .Values.theme }} -y
+                    composer require $(sed 's/[^ ]* */ drupal\/&/g' <<< "{{ .Values.modules }}")
+                    drush en -y {{ .Values.modules }}
                     #usermod -aG  www-data root
                     #chown root:www-data web/sites/default/settings.php
                     #chmod 777 web/sites/default/settings.php

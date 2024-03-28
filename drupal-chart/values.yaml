@@ -9,7 +9,7 @@ nodePort: 32080
 siteName: "test site"
 accountPass: "123"
 
-modules: "better_exposed_filters token admin_toolbar login_emailusername bootstrap"
+modules: better_exposed_filters token admin_toolbar login_emailusername
 theme:  "bootstrap"
 
 replicaCount: 1
