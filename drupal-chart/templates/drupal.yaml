@@ -78,7 +78,7 @@ spec:
                    
           ports:
             -
-              containerPort: {{.Values.nodePortService.port}}
+              containerPort: 8080
 
           volumeMounts:
           - mountPath: /var/www/html/modules

@@ -18,7 +18,7 @@ spec:
   - nodePort: {{.Values.nodePortService.nodePort}}
     port: {{.Values.nodePortService.port}}
     protocol: TCP
-    targetPort: {{.Values.nodePortService.port}}
+    targetPort: 8080
   selector:
     app: drupal
   sessionAffinity: None

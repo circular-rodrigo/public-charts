@@ -14,7 +14,7 @@ theme:  "bootstrap"
 
 nodePortService:
   nodePort: 32080
-  port: 8080
+  servicePort: 8080
 
 replicaCount: 1
 

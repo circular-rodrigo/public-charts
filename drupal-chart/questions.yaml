@@ -15,7 +15,7 @@ questions:
   type: string
   label: nodep port to be used
 
-- variable: nodePortService.port
+- variable: nodePortService.servicePort
   default: test site
   description:  the name of your website
   type: string
