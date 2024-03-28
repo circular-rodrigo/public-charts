@@ -15,10 +15,10 @@ spec:
   - IPv4
   ipFamilyPolicy: SingleStack
   ports:
-  - nodePort: {{.Values.nodePort}}
-    port: 8080
+  - nodePort: {{.Values.nodePortService.nodePort}}
+    port: {{.Values.nodePortService.port}}
     protocol: TCP
-    targetPort: 8080
+    targetPort: {{.Values.nodePortService.port}}
   selector:
     app: drupal
   sessionAffinity: None

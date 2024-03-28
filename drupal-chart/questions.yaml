@@ -1,21 +1,22 @@
 questions:
 # Questions for tab named "Some Example ConfigMap Values"
-- variable: siteName
-  default: test site
-  description:  the name of your website
+- variable: siteName  
   type: string
-  label: Example Boolean - Enable Docker Runtime
+  label: the name of your website
 
 # Questions for tab named "Some Example ConfigMap Values"
 - variable: modules
-  default: test site
-  description:  the name of your website
   type: string
-  label: Example Boolean - Enable Docker Runtime
+  label: modules to be required by docker compose
   
 # Questions for tab named "Some Example ConfigMap Values"
-- variable: nodePort
+- variable: nodePortService.nodePort
+  description: needs to be different for each deployment
+  type: string
+  label: nodep port to be used
+
+- variable: nodePortService.port
   default: test site
   description:  the name of your website
   type: string
-  label: Example Boolean - Enable Docker Runtime
+  label: node service port

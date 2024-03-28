@@ -5,14 +5,19 @@
 namespace: default
 
 #drupalConfig 
-nodePort: 32080
+
+#siteConfig
 siteName: "test site"
 accountPass: "123"
-
 modules: better_exposed_filters token admin_toolbar login_emailusername
 theme:  "bootstrap"
 
+nodePortService:
+  nodePort: 32080
+  port: 8080
+
 replicaCount: 1
+
 
 image:
   repository: nginx
