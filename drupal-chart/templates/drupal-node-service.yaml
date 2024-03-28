@@ -16,7 +16,7 @@ spec:
   ipFamilyPolicy: SingleStack
   ports:
   - nodePort: {{.Values.nodePortService.nodePort}}
-    port: {{.Values.nodePortService.port}}
+    port: {{.Values.nodePortService.servicePort}}
     protocol: TCP
     targetPort: 8080
   selector:
