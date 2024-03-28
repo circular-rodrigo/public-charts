@@ -62,8 +62,8 @@ spec:
                     chmod +x ./dsettings.sh
                     mv ./dsettings.sh /usr/local/bin/dsettings
                     #dynamicly change apache port
-                    sed -i '/^Listen/s/$/ \nListen {{.Values.nodePortService.servicePort}}/' /etc/apache2/ports.conf
-                    sed -i 's/<VirtualHost \*:.*>/<VirtualHost \*:{{.Values.nodePortService.servicePort}}>/g' /etc/apache2/sites-enabled/000-default.conf
+                    # sed -i '/^Listen/s/$/ \nListen {{.Values.nodePortService.servicePort}}/' /etc/apache2/ports.conf
+                    # sed -i 's/<VirtualHost \*:.*>/<VirtualHost \*:{{.Values.nodePortService.servicePort}}>/g' /etc/apache2/sites-enabled/000-default.conf
                     #this is required to gurantee a fresh install 
                     rm web/sites/default/settings.php
                     composer require drush/drush
