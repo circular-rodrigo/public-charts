@@ -32,7 +32,7 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Delete
   hostPath:
-    path: /mnt/k8sdata
+    path: /mnt/{{.Release.Name}}-k8sdata
     type: DirectoryOrCreate
 --- 
 apiVersion: v1
@@ -63,7 +63,7 @@ spec:
   persistentVolumeReclaimPolicy: Delete  # Retains the data even after the PVC is deleted
   storageClassName: none
   hostPath:
-    path: /mnt/mysql-data  # Update this with the path on the host machine where data will be stored
+    path: /mnt/{{.Release.Name}}-mysql-data  # Update this with the path on the host machine where data will be stored
     type: DirectoryOrCreate
 ---
 
