@@ -68,7 +68,7 @@ spec:
                     rm web/sites/default/settings.php
                     composer require drush/drush
                     composer require drupal/{{ .Values.theme }} 
-                    xargs -a /config/install_params.yaml drush site-install standard
+                    xargs -a /config/install_params.yaml drush site-install standard -y
                     drush theme:install {{ .Values.theme }} -y
                     drush config-set system.theme default {{ .Values.theme }} -y
                     composer require $(sed 's/[^ ]* */ drupal\/&/g' <<< "{{ .Values.modules }}")
