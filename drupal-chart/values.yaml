@@ -4,18 +4,20 @@
 
 namespace: default
 
-#drupalConfig 
 
-#siteConfig
+
+#DrupalsiteConfig=====================================================================================================
 siteName: "test site"
 accountPass: "123"
 modules: better_exposed_filters token admin_toolbar login_emailusername
 theme:  "bootstrap"
 
+#serviceConfig=====================================================================================================
 nodePortService:
   nodePort: 32080
   servicePort: 8080
 
+#defaultConfig=====================================================================================================
 replicaCount: 1
 
 
