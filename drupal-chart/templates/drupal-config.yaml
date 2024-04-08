@@ -4,35 +4,13 @@ metadata:
   name: {{.Release.Name}}-drupal-config
   namespace: {{.Release.Namespace}}
 data:
-  install_website.sh: |
-    #!/bin/bash
-    drush site-install standard \
-    --db-url="mysql://rod:rod@{{.Release.Name}}-drupal-mysql-service:3306/drupal-database" \
-    --account-name=admin \
-    --account-pass=abc \
-    --site-name="Your Site Name" \
-    --locale=en \
-    --include=views \
-    --yes
- 
+
   install_params.yaml: |
     --db-url="mysql://rod:rod@{{.Release.Name}}-drupal-mysql-service:3306/drupal-database"
     --site-name="{{ .Values.siteName }}"
-          # mail: 'admin@example.com'
-          # default-langcode: 'en'
     --locale='en'
-          # profile: 'standard'
-          # updates: 'true'
     --account-name='admin'
     --account-pass={{ .Values.accountPass | quote }}
-          # account-mail: 'admin@example.com'
-          # #account_name: "rod"
-        #account_pass: "rod"
-        #site_name: "test-site"
-        #mail: 'admin@example.com'
-        #langcode: 'en'
   dsettings.sh: | 
     #!/bin/bash
-    #
-    ## Define the command you want to execute
     vim ./web/sites/default/settings.php
