@@ -9,7 +9,7 @@ namespace: default
 #DrupalsiteConfig=====================================================================================================
 siteName: "test site"
 accountPass: "123"
-modules: better_exposed_filters token admin_toolbar login_emailusername
+modules: better_exposed_filters token admin_toolbar login_emailusername webform:^6.2@beta
 theme:  "bootstrap"
 
 #serviceConfig=====================================================================================================

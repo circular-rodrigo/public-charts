@@ -14,3 +14,23 @@ data:
   dsettings.sh: | 
     #!/bin/bash
     vim ./web/sites/default/settings.php
+
+  add-civi-db-to-drupal.sh: |
+    cat << EOF >> web/sites/default/settings.php
+
+    \$databases['civicrm']['default'] = array (
+      'database' => 'civi-database',
+      'username' => 'rod',
+      'password' => 'rod',
+      'prefix' => '',
+      'host' => 'drupal-civi-mysql-service',
+        'port' => '3307',
+        'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+        'driver' => 'mysql',
+    );
+    base_url = 'http://localhost:8080';
+    trusted_host_patterns = [
+           'http://localhost:8080',
+         ];
+    EOF 
+

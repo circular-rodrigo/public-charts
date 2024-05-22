@@ -20,7 +20,7 @@ spec:
       initContainers:
         -
           name: init-sites-volume
-          image: pincholinco/drupal:my_drupal
+          image: rodrigo578/drupal-image 
           imagePullPolicy: IfNotPresent
           command: ['/bin/bash', '-c']
           args: ['cp -r /var/www/html/sites/ /data/; chown www-data:www-data /data/ -R']
@@ -31,7 +31,7 @@ spec:
             name: config-volume
       containers: 
         - 
-          image: pincholinco/drupal:my_drupal
+          image: rodrigo578/drupal-image
           name: drupal
           imagePullPolicy: IfNotPresent
           lifecycle:          
@@ -41,19 +41,29 @@ spec:
                   - '/bin/bash'
                   - '-c'
                   - |
-                    su
-                    cp /config/dsettings.sh ./dsettings.sh
-                    chmod +x ./dsettings.sh
-                    mv ./dsettings.sh /usr/local/bin/dsettings
+                    drush cache-rebuild -y
                     rm web/sites/default/settings.php
                     composer require drush/drush
-                    composer require drupal/{{ .Values.theme }} 
+                    composer require drupal/{{ .Values.theme }}
                     xargs -a /config/install_params.yaml drush site-install standard -y
                     drush theme:install {{ .Values.theme }} -y
                     drush config-set system.theme default {{ .Values.theme }} -y
                     composer require $(sed 's/[^ ]* */ drupal\/&/g' <<< "{{ .Values.modules }}")
                     drush en -y {{ .Values.modules }}
-                   
+                    cv core:install --cms-base-url="http://localhost:8080" --db="mysql://rod:rod@drupal-civi-mysql-service:3307/civi-database" -f -vvvv
+                    drush pm:en -y webform_civicrm
+                    drush pm:en -y civicrm_entity
+                    drush wfld -y
+                    echo "\$civicrm_setting['CiviCRM Preferences']['authx_header_cred'] = '';" >> /web/sites/default/civicrm.settings.php
+                    echo "\$civicrm_setting['domain']['logging'] = 'FALSE';" >> web/sites/default/civicrm.settings.php
+                    echo "\$civicrm_setting['Mailing Preferences']['mailing_backend']['outBound_option'] = 5;" >> web/sites/default/civicrm.settings.php
+                    composer civicrm:publish
+                    su
+                    cp /config/dsettings.sh ./dsettings.sh
+                    chmod +x ./dsettings.sh
+                    mv ./dsettings.sh /usr/local/bin/dsettings
+                    exit
+
           ports:
             -
               containerPort: 8080

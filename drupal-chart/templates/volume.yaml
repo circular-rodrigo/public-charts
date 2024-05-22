@@ -65,6 +65,37 @@ spec:
   hostPath:
     path: /mnt/{{.Release.Name}}-mysql-data  # Update this with the path on the host machine where data will be stored
     type: DirectoryOrCreate
+--- 
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata: 
+  name: {{.Release.Name}}-civi-pvc-mysql
+  namespace: {{.Release.Namespace}}
+spec: 
+  accessModes: 
+    - ReadWriteOnce
+  storageClassName: none
+  resources: 
+    requests: 
+      storage: 5Gi
+  volumeName: {{.Release.Name}}-civi-mysql-pv
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{.Release.Name}}-civi-mysql-pv
+  namespace: {{.Release.Namespace}}
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce  # This means the volume can be mounted as read-write by a single node
+  persistentVolumeReclaimPolicy: Delete  # Retains the data even after the PVC is deleted
+  storageClassName: none
+  hostPath:
+    path: /mnt/{{.Release.Name}}-civi-mysql-data  # Update this with the path on the host machine where data will be stored
+    type: DirectoryOrCreate
 ---
 
 

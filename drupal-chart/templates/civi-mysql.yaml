@@ -2,33 +2,33 @@
 apiVersion: v1
 kind: Service
 metadata: 
-  name: {{.Release.Name}}-drupal-mysql-service
+  name: {{.Release.Name}}-civi-mysql-service
   namespace: {{.Release.Namespace}}
 spec: 
   ports: 
     - 
-      name: mysql
-      port: 3306
+      name: civi
+      port: 3307
       protocol: TCP
       targetPort: 3306
   selector: 
-    app: drupal-mysql
+    app: civi-mysql
 --- 
 apiVersion: apps/v1
 kind: Deployment
 metadata: 
-  name: {{.Release.Name}}-drupal-mysql
+  name: {{.Release.Name}}-civi-mysql
   labels:
-    app: drupal-mysql
+    app: civi-mysql
 spec: 
   replicas: 1
   selector:
     matchLabels:
-      app: drupal-mysql
+      app: civi-mysql
   template: 
     metadata: 
       labels: 
-        app: drupal-mysql
+        app: civi-mysql
     spec: 
       containers: 
         - 
@@ -41,23 +41,24 @@ spec:
               value: "rod"  
             - 
               name: MYSQL_DATABASE
-              value: drupal-database
+              value: civi-database
             - 
               name: MYSQL_PASSWORD
               value: "rod"
           image: "mysql:5.7" 
-          name: cont-drupal-mysql
+          name: cont-civi-mysql
+          
           ports: 
             - 
               containerPort: 3306
-              name: mysql
+              name: civi-mysql
               protocol: TCP
           volumeMounts: 
             - 
-              mountPath: /data
-              name: vol-drupal
+              mountPath: /civi-data
+              name: vol-civi
       volumes: 
         - 
-          name: vol-drupal
+          name: vol-civi
           persistentVolumeClaim: 
-            claimName: {{.Release.Name}}-drupal-pvc-mysql
+            claimName: {{.Release.Name}}-civi-pvc-mysql
